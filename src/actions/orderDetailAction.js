@@ -45,8 +45,8 @@ export const updateOrderDetailForEmployee = (id, orderDetail,history) => async (
         orderDetail
       );
     }
-    history.go("/employeeConfirm")
-    history.go()
+    // history.push("/employeeConfirm")
+    // history.go()
   } catch (err) {
     dispatch({
       type: GET_ERRORS,

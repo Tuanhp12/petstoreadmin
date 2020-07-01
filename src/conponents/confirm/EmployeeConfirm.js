@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updateOrderDetailForEmployee } from "../../actions/orderDetailAction";
 import { getCustomers } from "../../actions/customerAction";
 import { useHistory } from "react-router-dom";
+import { sendEmail } from "../../actions/emailAction";
 
 function EmployeeConfirm({
   getCustomers,
   orderDetailProps,
   customersProps,
   updateOrderDetailForEmployee,
+  sendEmail,
 }) {
   const history = useHistory();
 
@@ -16,29 +18,33 @@ function EmployeeConfirm({
     getCustomers();
   }, []);
 
+  const [feedback, setFeedback] = useState("");
   // console.log(customersProps);
   let orderDetails = customersProps.map((customer, index) => {
     let isConfirm = 0;
     if (customer.orderDetail.status === "Not Confirm") {
       isConfirm = 1;
-    }
-    else if (customer.orderDetail.status === "Confirmed") {
+    } else if (customer.orderDetail.status === "Confirmed") {
       isConfirm = 2;
-      
     }
-    else{
-      isConfirm = 0
-    }
-    const confirmOrder = (customerIdentifier) => {
+    const confirmOrder = (customerIdentifier, customerEmail) => {
       customer.orderDetail.status = "Confirmed";
+      setFeedback(
+        'Your order has been confirmed, we will ship the item as soon as possible'
+      );
+      console.log(feedback)
+      sendEmail(customerEmail, feedback);
       updateOrderDetailForEmployee(
         customerIdentifier,
         customer.orderDetail,
         history
       );
     };
-    const confirmPayment = (customerIdentifier) => {
+    const confirmPayment = (customerIdentifier, customerEmail) => {
       customer.orderDetail.status = "Have Paid";
+      setFeedback('Payment confirmed, thanks for using our service');
+      console.log(feedback)
+      sendEmail(customerEmail, feedback);
       updateOrderDetailForEmployee(
         customerIdentifier,
         customer.orderDetail,
@@ -52,7 +58,7 @@ function EmployeeConfirm({
         <td>
           <button
             onClick={() => {
-              confirmOrder(customer.customerIdentifier);
+              confirmOrder(customer.customerIdentifier, customer.email);
             }}
           >
             Confirm order
@@ -64,7 +70,7 @@ function EmployeeConfirm({
         <td>
           <button
             onClick={() => {
-              confirmPayment(customer.customerIdentifier);
+              confirmPayment(customer.customerIdentifier, customer.email);
             }}
           >
             Confirm Payment
@@ -121,4 +127,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getCustomers,
   updateOrderDetailForEmployee,
+  sendEmail,
 })(EmployeeConfirm);
