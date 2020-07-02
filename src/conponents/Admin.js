@@ -13,9 +13,6 @@ function Admin({ match }) {
   }
   return (
     <div>
-      <h1>This is Admin page</h1>
-      <Link to="/adminLogout">Logout</Link>
-
       <Route
         exact
         path={`${match.url}/addProduct`}
@@ -32,6 +29,7 @@ function Admin({ match }) {
         path={`${match.url}/listProducts`}
         component={ListProducts}
       />
+
     </div>
   );
 }

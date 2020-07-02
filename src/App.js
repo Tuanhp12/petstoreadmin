@@ -9,18 +9,22 @@ import ListProducts from "./conponents/products/ListProducts";
 import Login from "./conponents/Login";
 import Logout from "./conponents/Logout";
 import Admin from "./conponents/Admin";
+import Header from "./conponents/layouts/Header";
 
 function App() {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/adminLogout" component={Logout} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
-      </div>
-    </Provider>
+    <div>
+      <Header />
+      <Provider store={store}>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route path="/adminLogout" component={Logout} />
+            <Route path="/admin" component={Admin} />
+          </Switch>
+        </div>
+      </Provider>
+    </div>
   );
 }
 

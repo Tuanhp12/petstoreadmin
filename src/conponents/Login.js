@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory,Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAccounts } from "../actions/accountActions";
 function Login({ accountProps, getAccounts }) {
@@ -20,7 +20,7 @@ function Login({ accountProps, getAccounts }) {
     accountProps &&
       accountProps.map((account) => {
         if (username === account.username && password === account.password) {
-          localStorage.setItem("token", "thisisauthendication")
+          localStorage.setItem("token", "thisisauthendication");
           setValue(account.accountIdentifier);
           setAccount(account);
           setLoggedIn({
@@ -30,38 +30,56 @@ function Login({ accountProps, getAccounts }) {
       });
   };
 
+  let [text, setText] = useState('')
+
   if (loggedIn) {
     getHistory.push({
       pathname: "/admin",
       state: { getValue: value, passAccount: accountInfo },
     });
-  } else {
+  } else{
+    
   }
-
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="container" id="loginForm">
+      <div class="card card-body" style={{ width: "300px" }}>
+        <h1>Đăng nhập</h1>
+        {text}
+        <form onSubmit={submitForm} className="was-validated">
+          <div className="form-group">
+            <label for="uname">Tài khoản:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="uname"
+              placeholder="Nhập tài khoản"
+              name="uname"
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <div className="invalid-feedback">Chưa nhập thông tin.</div>
+          </div>
+          <div className="form-group">
+            <label for="pwd">Mật khẩu:</label>
+            <input
+              type="password"
+              className="form-control"
+              id="pwd"
+              placeholder="Nhập mật khẩu"
+              name="pswd"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="invalid-feedback">Chưa nhập thông tin.</div>
+          </div>
 
-      <form onSubmit={submitForm}>
-        <input
-          type="text"
-          placeholder="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <br />
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <input type="submit" />
-        <br />
-      </form>
+          <button type="submit" className="btn btn-primary">
+            Đăng nhập
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

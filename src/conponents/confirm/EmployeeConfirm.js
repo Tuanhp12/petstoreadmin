@@ -56,7 +56,7 @@ function EmployeeConfirm({
     if (isConfirm === 1) {
       button = (
         <td>
-          <button
+          <button className="btn btn-success"
             onClick={() => {
               confirmOrder(customer.customerIdentifier, customer.email);
             }}
@@ -68,7 +68,7 @@ function EmployeeConfirm({
     } else if (isConfirm === 2) {
       button = (
         <td>
-          <button
+          <button className="btn btn-primary"
             onClick={() => {
               confirmPayment(customer.customerIdentifier, customer.email);
             }}
@@ -82,7 +82,7 @@ function EmployeeConfirm({
     }
 
     return (
-      <tr key={index} className="product container col-md-12">
+      <tr key={index} className="product container col-md-10">
         <td>{customer.nameCustomer}</td>
         <td>{customer.email}</td>
         <td>{customer.phone}</td>
@@ -99,18 +99,23 @@ function EmployeeConfirm({
 
   return (
     <div>
-      <table className="table table-bordered col-md-12">
+      <div className="text-center">
+      <hr/>
+        <h2>Quản lý đơn hàng</h2>
+      </div>
+      <hr/>
+      <table className="table table-bordered table table-hover col-md-12">
         <thead>
           <tr>
-            <th>Customer Name</th>
-            <th>Customer Email</th>
-            <th>Customer Phone</th>
-            <th>Customer Address</th>
-            <th>Customer City</th>
-            <th>orderDetailIdentifier</th>
-            <th>created_At</th>
-            <th>totalPrice</th>
-            <th>status</th>
+            <th>Tên khách hàng</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Thành phố</th>
+            <th>Id chi tiết đơn hàng</th>
+            <th>Ngày đặt hàng</th>
+            <th>Tổng giá</th>
+            <th>Trạng thái</th>
             <th></th>
           </tr>
         </thead>
