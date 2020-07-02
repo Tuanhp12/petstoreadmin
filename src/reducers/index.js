@@ -5,6 +5,7 @@ import categoryReducer from './categoryReducer'
 // import basketReducer from './basketReducer'
 import customerReducer from "./customerReducer";
 import orderDetailReducer from "./orderDetailReducer";
+import accountReducer from "./accountReducer";
 
 export default combineReducers({
 //   errors: errorReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   category: categoryReducer,
 //   basketState : basketReducer,
   customerState: customerReducer,
-  orderDetailState: orderDetailReducer
+  orderDetailState: orderDetailReducer,
+  accountState: accountReducer
 }); 
