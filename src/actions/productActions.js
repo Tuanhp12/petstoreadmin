@@ -1,5 +1,20 @@
 import axios from 'axios'
-import {GET_PRODUCT, GET_CATEGORY, GET_ERRORS} from './types'
+import {GET_PRODUCT, GET_CATEGORY, GET_ERRORS, GET_PRODUCTS} from './types'
+
+export const getAllProduct = () => async dispatch => {
+    try{
+        const res = await axios.get(`http://localhost:8080/api/v1/products/all`)
+        dispatch({
+            type: GET_PRODUCTS,
+            payload:res.data
+        })
+    }catch(err){
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+          });
+    }
+}
 
 export const getProducts = category_id => async dispatch => {
     try{
@@ -40,3 +55,4 @@ export const createProduct = (category_id,productRequest,history) => async dispa
         })
     }
 }
+

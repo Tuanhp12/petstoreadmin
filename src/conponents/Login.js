@@ -47,7 +47,7 @@ function Login({ accountProps, getAccounts }) {
         {text}
         <form onSubmit={submitForm} className="was-validated">
           <div className="form-group">
-            <label for="uname">Tài khoản:</label>
+            <label htmlFor="uname">Tài khoản:</label>
             <input
               type="text"
               className="form-control"
@@ -61,7 +61,7 @@ function Login({ accountProps, getAccounts }) {
             <div className="invalid-feedback">Chưa nhập thông tin.</div>
           </div>
           <div className="form-group">
-            <label for="pwd">Mật khẩu:</label>
+            <label htmlFor="pwd">Mật khẩu:</label>
             <input
               type="password"
               className="form-control"
